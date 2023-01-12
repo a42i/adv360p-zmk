@@ -58,4 +58,7 @@ config SPI
 config ZMK_SLEEP
 	default y
 
+config ZMK_IDLE_SLEEP_TIMEOUT
+	default 3600000
+
 endif # BOARD_ADV360_LEFT || BOARD_ADV360_RIGHT
