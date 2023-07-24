@@ -47,7 +47,7 @@
       };
 
       sticky_lgui: double_tap_lgui_sticky {
-                   compatible = "zmk,behavior-tap-dance"           ;
+                   compatible = "zmk,behavior-tap-dance";
                    label = "double_tap_lgui_sticky";
                    #binding-cells = <0>;
                    bindings = <&kp LGUI>, <&sk LGUI>;
