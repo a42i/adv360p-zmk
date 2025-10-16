@@ -6,6 +6,9 @@
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// https://zmk.dev/docs/keymaps/behaviors/hold-tap?examples=mo_tog
+#define MO_TOG(layer) &mo_tog layer layer
+
 / {
     behaviors {
       #include "macros.dtsi"
@@ -62,6 +65,14 @@
 		 #binding-cells = <0>;
 		 bindings = <&kp RCTRL>, <&sk LGUI>;
       };
+
+      mo_tog: behavior_mo_tog {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&tog>;
+      };
     };
 
   keymap {
@@ -74,7 +85,7 @@
         &kp TAB     &kp Q     &kp W    &kp E    &kp R      &kp T  &m_switch                                                            &m_launcher &kp Y  &kp U  &kp I     &kp O    &kp P    &kp BSLH
         &kp LCTRL   &kp A     &kp S    &kp D    &kp F      &kp G  &m_launcher     &sticky_lgui  &kp DEL  &kp ESC   &ctrl_lgui          &m_switch   &kp H  &kp J  &kp K     &kp L    &kp SEMI &kp SQT
         &lshft_caps &kp Z     &kp X    &kp C    &kp V      &kp B                                &kp HOME &kp PG_UP                                 &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH &rshft_caps
-        &mo 2       &kp GRAVE &mo 3    &kp LEFT &kp RIGHT                &kp BSPC &kp LALT      &kp END  &kp PG_DN &kp ENTER &kp SPACE                    &kp UP &kp DOWN  &kp LBKT &kp RBKT &mo 2
+        MO_TOG(2)   &kp GRAVE &mo 3    &kp LEFT &kp RIGHT                &kp BSPC &kp LALT      &kp END  &kp PG_DN &kp ENTER &kp SPACE                    &kp UP &kp DOWN  &kp LBKT &kp RBKT MO_TOG(2)
       >;
     };
     keypad {
@@ -84,7 +95,7 @@
         &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp KP_N7  &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp BSLH
         &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp KP_N4  &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &kp SQT
         &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp KP_N1  &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &kp RSHFT
-        &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp KP_N0              &kp UP     &kp DOWN     &kp KP_DOT    &kp RBKT        &mo 2
+        MO_TOG(2) &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp KP_N0              &kp UP     &kp DOWN     &kp KP_DOT    &kp RBKT        MO_TOG(2)
       >;
     };
     fn {
@@ -107,23 +118,23 @@
         &none &none        &none        &none        &none                                       &none &none &none &none      &bl BL_TOG &rgb_ug RGB_TOG                                     &bl BL_INC   &bl BL_DEC   &none &none &none
       >;
     };
-    extra1 { 
-      display-name = "Red";    
+    extra1 {
+      display-name = "Red";
       status = "reserved";
     };
 
-    extra2 { 
-      display-name = "Purple";    
+    extra2 {
+      display-name = "Purple";
       status = "reserved";
     };
 
-    extra3 { 
-      display-name = "Cyan";    
+    extra3 {
+      display-name = "Cyan";
       status = "reserved";
     };
 
-    extra4 { 
-      display-name = "Yellow";    
+    extra4 {
+      display-name = "Yellow";
       status = "reserved";
     };
   };
